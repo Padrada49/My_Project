@@ -62,4 +62,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function role(){
+        return $this->belongsTo(Roles::class,'role_id');
+    }
+    public function checkRole($roles_code){ // เช็คว่า user 1 คน มี role ตรงกับใน role code ไหม (true/false)
+        return strtolower($this->role->roles_code) == strtolower($roles_code);
+    }
 }
